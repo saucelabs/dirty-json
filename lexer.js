@@ -1,21 +1,21 @@
-// < begin copyright > 
+// < begin copyright >
 // Copyright Ryan Marcus 2018
-// 
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
 // published by the Free Software Foundation, either version 3 of the
 // License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Affero General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
-// 
-// < end copyright > 
- 
+//
+// < end copyright >
+
 "use strict";
 
 const Lexer = require("lex");
@@ -80,42 +80,42 @@ function getLexer(string) {
 
     let col = 0;
     let row = 0;
-    
-    lexer.addRule(/"((?:\\.|[^"])*)($|")/, (lexeme, txt) => {
+
+    lexer.addRule(/"((?:\\.|[^"])*)($|")/, function(lexeme, txt) {
         col += lexeme.length;
         return {type: LEX_QUOTE, value: parseString(txt), row, col};
     });
 
-    lexer.addRule(/'((?:\\.|[^'])*)($|')/, (lexeme, txt) => {
+    lexer.addRule(/'((?:\\.|[^'])*)($|')/, function(lexeme, txt) {
         col += lexeme.length;
         return {type: LEX_QUOTE, value: parseString(txt), row, col};
     });
 
     // floats with a dot
-    lexer.addRule(/[\-0-9]*\.[0-9]*([eE][\+\-]?)?[0-9]*/, lexeme => {
+    lexer.addRule(/[\-0-9]*\.[0-9]*([eE][\+\-]?)?[0-9]*/, function(lexeme) {
         col += lexeme.length;
         return {type: LEX_FLOAT, value: parseFloat(lexeme), row, col};
     });
 
     // floats without a dot but with e notation
-    lexer.addRule(/\-?[0-9]+([eE][\+\-]?)[0-9]*/, lexeme => {
+    lexer.addRule(/\-?[0-9]+([eE][\+\-]?)[0-9]*/, function(lexeme) {
         col += lexeme.length;
         return {type: LEX_FLOAT, value: parseFloat(lexeme), row, col};
     });
-    
-    lexer.addRule(/\-?[0-9]+/, lexeme => {
+
+    lexer.addRule(/\-?[0-9]+/, function(lexeme) {
         col += lexeme.length;
         return {type: LEX_INT, value: parseInt(lexeme), row, col};
     });
 
-    lexSpc.forEach(item => {
-        lexer.addRule(item[0], lexeme => {
+    lexSpc.forEach(function(item) {
+        lexer.addRule(item[0], function(lexeme) {
             col += lexeme.length;
             return {type: item[1], value: lexeme, row, col};
         });
     });
 
-    lexer.addRule(/\s/, lexeme => {
+    lexer.addRule(/\s/, function(lexeme) {
         // chomp whitespace...
         if (lexeme == "\n") {
             col = 0;
@@ -125,9 +125,9 @@ function getLexer(string) {
         }
     });
 
-    lexer.addRule(/./, lexeme => {
+    lexer.addRule(/./, function(lexeme) {
         col += lexeme.length;
-        
+
         let lt = LEX_TOKEN;
         let val = lexeme;
 
@@ -149,7 +149,7 @@ function lexString(str, emit) {
     while ((token = lex.lex())) {
         emit(token);
     }
-    
+
 }
 
 module.exports.getAllTokens = getAllTokens;

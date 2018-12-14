@@ -1,4 +1,5 @@
 # dirty-json
+## it's node package, it's not compatible with browsers. This fork fixes all misalignments to be browser compatible.
 
 [ ![Codeship Status for RyanMarcus/dirty-json](https://codeship.com/projects/cbc19870-2e42-0132-d30c-4adef3b19db7/status)](https://www.codeship.io/projects/39346)  [![Coverage Status](https://coveralls.io/repos/github/RyanMarcus/dirty-json/badge.svg?branch=master)](https://coveralls.io/github/RyanMarcus/dirty-json?branch=master) ![NPM version](https://badge.fury.io/js/dirty-json.svg)
 
@@ -77,7 +78,7 @@ Currently `dirty-json` uses a lexer [powered by lex](https://github.com/aaditmsh
 
 ## Security concerns
 
-This package makes heavy use of regular expressions in its lexer. As a result, it may be vulnerable to a [REDOS attack](https://snyk.io/blog/redos-and-catastrophic-backtracking). Versions prior to `0.5.1` and after `0.0.5` were *definitely* vulnerable (thanks to [Jamie Davis](http://people.cs.vt.edu/~davisjam/) for pointing this out). I believe version `0.5.1` and later are safe, but since I do not know of any tool to verify a RegEx, I can't prove it. 
+This package makes heavy use of regular expressions in its lexer. As a result, it may be vulnerable to a [REDOS attack](https://snyk.io/blog/redos-and-catastrophic-backtracking). Versions prior to `0.5.1` and after `0.0.5` were *definitely* vulnerable (thanks to [Jamie Davis](http://people.cs.vt.edu/~davisjam/) for pointing this out). I believe version `0.5.1` and later are safe, but since I do not know of any tool to verify a RegEx, I can't prove it.
 
 ## License
 > Copyright 2018, 2016, 2015, 2014 Ryan Marcus
@@ -85,11 +86,11 @@ This package makes heavy use of regular expressions in its lexer. As a result, i
 > it under the terms of the GNU Affero General Public License as published by
 > the Free Software Foundation, either version 3 of the License, or
 > (at your option) any later version.
-> 
+>
 > dirty-json is distributed in the hope that it will be useful,
 > but WITHOUT ANY WARRANTY; without even the implied warranty of
 > MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 > GNU Affero General Public License for more details.
-> 
+>
 > You should have received a copy of the GNU Affero General Public License
 > along with dirty-json.  If not, see <http://www.gnu.org/licenses/>.
